@@ -22,20 +22,20 @@ class ProductSeeder extends Seeder
                 case $sub_category->name == 'Верхняя одежда':
                     $names = ['Худи', 'Футболка','Свитшот'];
                     foreach($names as $name){
-                        Product::factory()->create([
+                        Product::factory(10)->create([
                             'name' => $name,
                             'sub_category_id' => $sub_category->id
                         ]);
                     }
                     break;
                 case $sub_category->name == 'Штаны':
-                    Product::factory()->create([
+                    Product::factory(5)->create([
                         'name' => 'Штаны',
                         'sub_category_id' => $sub_category->id
                     ]);
                     break;
                 case $sub_category->name == 'Головной убор':
-                    Product::factory()->create([
+                    Product::factory(5)->create([
                         'name' => 'Бейсболка',
                         'sub_category_id' => $sub_category->id
                     ]);
@@ -43,7 +43,7 @@ class ProductSeeder extends Seeder
                 case $sub_category->name == 'Аксессуар':
                     $names = ['Перчатки' , 'Очки'];
                     foreach($names as $name){
-                        Product::factory()->create([
+                        Product::factory(6)->create([
                             'name' => $name,
                             'sub_category_id' => $sub_category->id
                         ]);

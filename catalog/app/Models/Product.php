@@ -7,6 +7,7 @@ use App\Models\Color;
 use App\Models\Image;
 use App\Models\Category;
 use App\Models\SubCategory;
+use App\Models\Gender;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -37,5 +38,9 @@ class Product extends Model
 
     public function images(){
         return $this->hasMany(Image::class);
+    }
+
+    public function genders(){
+        return $this->belongsToMany(Gender::class);
     }
 }

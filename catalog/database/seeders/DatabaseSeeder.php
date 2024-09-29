@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Gender;
 use App\Models\Size;
 use App\Models\User;
 use App\Models\Color;
@@ -16,6 +17,7 @@ use Database\Seeders\ImageSeeder;
 use Database\Seeders\ProductSeeder;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\SubCategorySeeder;
+use Database\Seeders\GenderSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,25 +32,34 @@ class DatabaseSeeder extends Seeder
         $this->call(SubCategorySeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(SizeSeeder::class);
+        $this->call(GenderSeeder::class);
 
         $products = Product::all();
         foreach($products as $product){
             $colors = Color::inRandomOrder()->take(rand(3,6))->pluck('id');
-            $category = Category::findOrFail(rand(1,2))->id;
             $sizes = Size::all()->pluck('id');
+            $gender = Gender::findOrFail(rand(1,2))->id;
             $product->colors()->attach($colors);
+            $product->genders()->attach($gender);
             if($product->name == 'Очки' || $product->name == 'Бейсболка'){
                 $product->sizes()->attach(4);
+                $product->genders()->syncWithoutDetaching(Gender::findOrFail(1)->id);
+                $product->genders()->syncWithoutDetaching(Gender::findOrFail(2)->id);
             }else{
                 $product->sizes()->attach($sizes);
             }
-            $product->categories()->attach($category);
             
         }
 
-        $random_products = Product::inRandomOrder()->take(10)->get();
+        $random_products = Product::inRandomOrder()->take(15)->get();
         foreach($random_products as $product){
             $product->categories()->syncWithoutDetaching(Category::findOrFail(3)->id);
+        }
+
+        $random_products = Product::inRandomOrder()->take(5)->get();
+        foreach($random_products as $product){
+            $product->genders()->syncWithoutDetaching(Gender::findOrFail(1)->id);
+            $product->genders()->syncWithoutDetaching(Gender::findOrFail(2)->id);
         }
 
         $this->call(ImageSeeder::class);

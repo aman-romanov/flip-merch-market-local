@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Number;
@@ -21,9 +22,12 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'price' => Number::currency($this->price, 'KZT'),
+            'previousPrice' => Number::currency($this->previousPrice, 'KZT'),
             'sub_category' => SubCategory::findOrFail($this->sub_category->id)->first()->name,
+            'category_id' => Category::findOrFail(SubCategory::findOrFail($this->sub_category->id)->first()->id)->first()->name,
             'colors' => ColorResource::collection($this->whenLoaded('colors')),
             'sizes' => SizeResource::collection($this->whenLoaded('sizes')),
+            'gender' => GenderResource::collection($this->whenLoaded('genders')),
             'images' => ImageResource::collection($this->whenLoaded('images'))
         ];
     }

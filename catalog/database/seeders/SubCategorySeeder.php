@@ -15,13 +15,15 @@ class SubCategorySeeder extends Seeder
     public function run(): void
     {
         $categories = Category::all();
-        $names = ['Верхняя одежда', 'Штаны', 'Головной убор', 'Аксессуар'];
         foreach($categories as $category){
-            foreach($names as $name){
-                SubCategory::create([
-                    'name' => $name,
-                    'category_id' => $category->id
-                ]);
+            if($category->name === 'Одежда'){
+                $names = ['Верхняя одежда', 'Штаны', 'Головной убор', 'Аксессуар'];
+                foreach($names as $name){
+                    SubCategory::create([
+                        'name' => $name,
+                        'category_id' => $category->id
+                    ]);
+                }
             }
         }
     }

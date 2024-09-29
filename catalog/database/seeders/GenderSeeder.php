@@ -2,21 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use App\Models\Gender;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class GenderSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $names = ['Одежда', 'Канцелярия', 'Посуда'];
+        $names = ['Женское', 'Мужское'];
         foreach($names as $name){ 
-            Category::create([
-                'name' => $name
+            Gender::create([
+                'gender' => $name
             ]);
         }
     }

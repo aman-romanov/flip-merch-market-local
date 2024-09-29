@@ -19,7 +19,8 @@ class ProductFactory extends Factory
     {
         return [
             'description' => fake()->paragraph(),
-            'price' => fake()->randomNumber(5)
+            'price' => fake()->randomNumber(5),
+            'previousPrice' => fake()->randomNumber(5),
         ];
     }
 }

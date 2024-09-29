@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function index(){
         $products = Product::all();
 
-        return ProductResource::collection($products->load('colors', 'sizes', 'images'));
+        return ProductResource::collection($products->load('colors', 'sizes', 'images', 'genders'));
     }
 
     public function products(Category $category, SubCategory $sub_category){
@@ -27,20 +27,20 @@ class ProductController extends Controller
 
         $products = Product::where('sub_category_id', $current_sub_category->id)->get();
 
-        $products->load('colors', 'images');
+        $products->load('colors', 'sizes', 'images', 'genders');
 
         return ProductResource::collection($products);
     }
 
     public function show(Category $category, SubCategory $sub_category, Product $product){
-        $product->load('colors', 'sizes', 'images');
+        $product->load('colors', 'sizes', 'images', 'genders');
 
         return new ProductResource($product);
     }
 
     public function product(Product $product){
 
-        $product ->load('colors', 'sizes', 'images');
+        $product ->load('colors', 'sizes', 'images', 'genders');
 
         return new ProductResource($product);
     }
@@ -79,9 +79,13 @@ class ProductController extends Controller
             $product->sizes()->attach($size['id']);
         }
 
+        foreach($request->genders as $gender){
+            $product->genders()->attach($gender['id']);
+        }
+
         $product->categories()->attach($category->id);
 
-        $product->load('colors', 'sizes', 'images');
+        $product->load('colors', 'sizes', 'images', 'genders');
         
         return new ProductResource($product);
     }
@@ -107,6 +111,10 @@ class ProductController extends Controller
 
         foreach($request->sizes as $size){
             $product->sizes()->attach($size['id']);
+        }
+
+        foreach($request->genders as $gender){
+            $product->genders()->attach($gender['id']);
         }
 
         $product->categories()->attach($request->category_id);
@@ -139,9 +147,13 @@ class ProductController extends Controller
             $product->sizes()->sync($size['id']);
         }
 
+        foreach($request->genders as $gender){
+            $product->genders()->attach($gender['id']);
+        }
+
         $product->categories()->sync($request->category_id);
 
-        $product->load('colors', 'sizes', 'images');
+        $product->load('colors', 'sizes', 'images', 'genders');
 
         return new ProductResource($product);
     }

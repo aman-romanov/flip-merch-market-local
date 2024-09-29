@@ -1,0 +1,174 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API документация",
+        "description": "",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Local API Server"
+        }
+    ],
+    "paths": {
+        "/api/cart": {
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Получить все товары из корзины",
+                "description": "Возвращает все товары в корзине пользователя",
+                "operationId": "getCartItems",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CartItem"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Обновить товар в корзине",
+                "description": "Обновление товара в корзине",
+                "operationId": "updateCart",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CartItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Товар обновлен в корзине"
+                    },
+                    "400": {
+                        "description": "Некорректные данные"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Добавить товар в корзину",
+                "description": "Добавление товара в корзину",
+                "operationId": "addToCart",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CartItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Товар добавлен в корзину"
+                    },
+                    "400": {
+                        "description": "Некорректные данные"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Удалить товар из корзины",
+                "description": "Удаление товара из корзины",
+                "operationId": "removeFromCart",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CartItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Товар удален из корзины"
+                    },
+                    "400": {
+                        "description": "Некорректные данные"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CartItem": {
+                "title": "CartItem",
+                "description": "CartItem model",
+                "required": [
+                    "user_id",
+                    "product_id",
+                    "color_id",
+                    "size_id",
+                    "sex_id",
+                    "count"
+                ],
+                "properties": {
+                    "user_id": {
+                        "description": "ID of the user",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "product_id": {
+                        "description": "ID of the product",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "color_id": {
+                        "description": "ID of the color",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "size_id": {
+                        "description": "ID of the size",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "sex_id": {
+                        "description": "ID of the sex",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "count": {
+                        "description": "Count of the items",
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

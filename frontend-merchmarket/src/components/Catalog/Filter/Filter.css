@@ -1,0 +1,45 @@
+
+  
+  .filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin:24px 0px ;
+    border-bottom: 1px solid #ccc; 
+    padding-bottom:24px ;
+  }
+  
+  .filter-section h3 {
+    color: rgb(0, 0, 0);
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16px;
+    
+  }
+  
+ .filter-options{
+    display: flex;
+    align-items: center;
+    gap:10px;
+ }
+
+.filter-options label{
+    color: rgb(103, 119, 136);
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.filter-gender-label, .filter-category-label{
+    text-transform: capitalize;
+}
+.filter-size {
+    text-transform: uppercase;
+  }
+  
+  .custom-label {
+    text-transform: none; 
+  }
+  

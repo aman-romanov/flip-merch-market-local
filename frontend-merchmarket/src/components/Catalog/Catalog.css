@@ -1,0 +1,80 @@
+.chosen-category-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(247, 250, 255);
+    padding: 24px 0px;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+  
+  .filtered-products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-left: 16px;
+    flex: 1; 
+  }
+  .filter{
+    width:15%;
+    padding-right: 1rem;
+  }
+  .catalog-page {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .catalog-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 0rem 4rem;
+  }
+  .filter-detail{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 24px 0;
+    margin-left: 16px;
+  }
+  .product-number{
+    color: rgb(30, 32, 34);
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+  }
+
+ .sort-select{
+    width: 191px;
+    height: 42px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0px 8px 0px 8px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 16px;
+    box-sizing: border-box;
+    border: 1px solid rgb(238, 240, 247);
+    border-radius: 4px;
+    
+ }
+
+ .text-top-catalog{
+  color: rgb(55, 125, 255);
+ }
+ .chosen-category-title-right{
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+ }
+ .chosen-category-title-left{
+  color: rgb(30, 32, 34);
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+ }

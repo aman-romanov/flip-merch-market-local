@@ -1,0 +1,30 @@
+.pagination-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 24px 0px;
+  }
+  
+  .pagination-buttons button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+    margin: 0px 8px;
+    border-radius: 4px; 
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    color: rgb(103, 119, 136);
+    border: none;
+    background-color: rgb(255, 255, 255);;
+  }
+  
+  .pagination-buttons button.active {
+    background: rgb(55, 125, 255);
+    color: rgb(255, 255, 255);
+  }
+  
+  

@@ -1,0 +1,70 @@
+.product-item {
+  width: 100%;
+  max-width: 316px;
+  max-height: 453px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+  border: 1px solid rgb(232, 234, 238);
+  border-radius: 8px; 
+  }
+
+  .product-image{
+    width: 100%;  
+  height: auto; 
+  max-width: 294px;
+  max-height: 294px;
+  margin: 32px 0;
+  }
+.product-name{
+  padding-top:16px;
+  margin:16px 0px;
+  color: rgb(30, 32, 34);
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+.price-container{
+  display: flex;
+  justify-content: space-between;
+}
+.product-price{
+  color: rgb(30, 32, 34);
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 21px;
+  text-align: left;
+}
+.product-old-price{
+  margin-left: 16px;
+  color: rgb(103, 119, 136);
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  text-align: left;
+  text-decoration-line: line-through;
+}
+.btn-to-cart{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  margin-top: 16px;
+  color: rgb(55, 125, 255);
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  box-sizing: border-box;
+  background-color: white;
+  border: 1px solid rgb(232, 234, 238);
+   border-radius: 24px; 
+}

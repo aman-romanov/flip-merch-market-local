@@ -1,0 +1,26 @@
+.search-bar{
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+    width: 600px;
+    height: 42px;
+    border-radius: 4px 0px 0px 4px;
+}
+.search-input{
+    box-sizing: border-box;
+    padding: 0 8px;
+    width: 537px;
+    height: 42px;
+    border: 1px solid rgb(238, 240, 247);
+    border-radius: 4px 0px 0px 4px;
+}
+.search-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 16px 13px 16px;
+    border-radius: 0px 4px 4px 0px;
+    background: rgb(55, 125, 255);
+    border: none;
+    color: white;
+}

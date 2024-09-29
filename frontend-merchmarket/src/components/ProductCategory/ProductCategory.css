@@ -1,0 +1,8 @@
+.category-container {
+  display: flex;
+  justify-content: space-between;
+  height: 442px;
+  border: 1px solid rgb(232, 234, 238);
+  border-radius: 8px; 
+}
+

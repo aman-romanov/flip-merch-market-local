@@ -1,0 +1,67 @@
+  /* merchmarket */
+  header{
+display: flex;
+padding-top: 24px;
+padding-bottom: 24px;
+padding-left: 4rem;
+padding-right: 4rem;
+align-items: center;
+box-sizing: border-box;
+justify-content: space-between;
+
+}
+.header-nav {
+  display: flex;
+  align-items: center;
+  margin-left: 24px;
+  justify-content: space-between;
+}
+.header-catalog{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header-nav ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  gap:18px;
+  padding: 0;
+  margin: 0; 
+  color: rgb(103, 119, 136);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-transform: uppercase;
+}
+.catalog-vector{
+  padding-left: 8px;
+}
+.header-nav ul li a {
+  text-decoration: none;
+  color: hsla(210,13%,47%,1);
+}
+
+.header-nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.btn-login{
+  width: 74px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 16px 13px 16px;
+  border-radius: 4px;
+  background-color: rgb(113, 134, 157);
+  color: rgb(255, 255, 255);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  border: none;
+  box-sizing: border-box;
+}

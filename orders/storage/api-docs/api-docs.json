@@ -1,0 +1,177 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API документация",
+        "description": "",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Local API Server"
+        }
+    ],
+    "paths": {
+        "/api/orders": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Создание заказа",
+                "description": "Создание заказа на основе содержимого корзины",
+                "operationId": "createOrder",
+                "responses": {
+                    "200": {
+                        "description": "Заказ успешно создан"
+                    },
+                    "400": {
+                        "description": "Корзина пуста"
+                    }
+                }
+            }
+        },
+        "/api/orders/{order}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Просмотр деталей заказа",
+                "description": "Получение деталей заказа по ID",
+                "operationId": "getOrderDetails",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Детали заказа"
+                    },
+                    "404": {
+                        "description": "Заказ не найден"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Обновление статуса заказа",
+                "description": "Обновление статуса заказа",
+                "operationId": "updateOrderStatus",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "status": {
+                                        "type": "string",
+                                        "example": "confirmed"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Статус заказа успешно обновлен"
+                    },
+                    "404": {
+                        "description": "Заказ не найден"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Order": {
+                "title": "Order",
+                "description": "Order model",
+                "required": [
+                    "user_id",
+                    "status",
+                    "items"
+                ],
+                "properties": {
+                    "user_id": {
+                        "description": "ID of the user",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "status": {
+                        "description": "Status of the order",
+                        "type": "string",
+                        "example": "new"
+                    },
+                    "items": {
+                        "description": "List of items in the order",
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "product_id",
+                                "color_id",
+                                "size_id",
+                                "sex_id",
+                                "count"
+                            ],
+                            "properties": {
+                                "product_id": {
+                                    "description": "ID of the product",
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "color_id": {
+                                    "description": "ID of the color",
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "size_id": {
+                                    "description": "ID of the size",
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "sex_id": {
+                                    "description": "ID of the sex",
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "count": {
+                                    "description": "Quantity of the product",
+                                    "type": "integer",
+                                    "example": 1
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Orders",
+            "description": "Orders"
+        }
+    ]
+}

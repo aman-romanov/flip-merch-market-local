@@ -1,0 +1,1302 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Catalog API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Вывод всех категорий",
+                "operationId": "ac9c4d978ea4e5b72915ca9728e5b8b1",
+                "responses": {
+                    "200": {
+                        "description": "Массив категорий",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CategoryResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/categories/{category}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Вывод категории с подкатегориями",
+                "operationId": "ff3ab984d3fe877eb16da6009394d694",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID категории",
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Массив категории с подкатегорями",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CategoryResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/admin/categories/create": {
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Создание новой категории",
+                "operationId": "c8e6d9d4e3a02d178cf3d8c461785cb6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Игрушки"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Массив с данными категории",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Category"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/admin/categories/{category}": {
+            "put": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Обновление категории",
+                "operationId": "decc152d00e60f86768977bbbe517a13",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID категории",
+                            "type": "integer",
+                            "example": "3"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Игрушки"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Массив с данными категории",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Category"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Удаление категории",
+                "operationId": "b12ec127627519cbc7b97b203a92ce55",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID категории",
+                            "type": "integer",
+                            "example": "3"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Категория удалена"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Вывод всех товаров",
+                "operationId": "d97d1c3727cbac49708b85f7d11f7d58",
+                "responses": {
+                    "200": {
+                        "description": "Массив со свойствами товара",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ProductResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/{category}/{sub_category}/{product}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Карточка товара определенной подкатегории",
+                "operationId": "687b66b3f7123a9806271e3fdaa0e658",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID категории",
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "sub_category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID подкатегории",
+                            "type": "integer",
+                            "example": "3"
+                        }
+                    },
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID товара",
+                            "type": "integer",
+                            "example": "3"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Карточка товара",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ProductResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/products/{product}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Карточка любого товара",
+                "operationId": "5578a4ff4cc0048eefc86673f190bea7",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID товара",
+                            "type": "integer",
+                            "example": "3"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Карточка товара",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ProductResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/admin/{category}/{sub_category}/product/create": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Создание товара в разделе подкатегории",
+                "operationId": "57b2d5e0802fbed9296588fe7063861e",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID категории",
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "sub_category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID подкатегории",
+                            "type": "integer",
+                            "example": "3"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProductRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Карточка товара",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ProductResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/admin/products/create": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Создание нового товара",
+                "operationId": "a4ccb5a2fdbc6bd366dec29283c474a4",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProductResource"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Карточка товара",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ProductRequest"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/admin/products/{product}": {
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Обновление товара",
+                "operationId": "179b156cb88a0b03bf77a7c6e7387e35",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID товара",
+                            "type": "integer",
+                            "example": "3"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProductRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Карточка товара",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ProductResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Удаление товара",
+                "operationId": "59266359abd431af75b386e0552b71e6",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID товара",
+                            "type": "integer",
+                            "example": "3"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Товар удален"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/products/find": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Поиск товаров по массиву ID",
+                "operationId": "ee2b7624e0824affd9233f7ef4bac1d3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": "3"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Массив товаров",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ProductResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/{category}/{sub_category}": {
+            "get": {
+                "tags": [
+                    "SubCategories"
+                ],
+                "summary": "Вывод подкатегории с товарами",
+                "operationId": "53442b7c8e4939fc902bbe97a121dc91",
+                "parameters": [
+                    {
+                        "name": "sub_category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID подкатегории",
+                            "type": "integer",
+                            "example": "3"
+                        }
+                    },
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID категории",
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Массив подкатегории с товарами",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/SubCategoryResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/admin/{category}/sub_category/create": {
+            "post": {
+                "tags": [
+                    "SubCategories"
+                ],
+                "summary": "Создание новой подкатегории",
+                "operationId": "c2e7049b2b5118d666260f1ead263aff",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID категории",
+                            "type": "integer",
+                            "example": "3"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Игрушки"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Массив подкатегории с данными",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/SubCategory"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/admin/{category}/{sub_category}": {
+            "put": {
+                "tags": [
+                    "SubCategories"
+                ],
+                "summary": "Обновление подкатегории",
+                "operationId": "77fe49fd5b46bf9e7e0ce26d1f61913a",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID категории",
+                            "type": "integer",
+                            "example": "3"
+                        }
+                    },
+                    {
+                        "name": "sub_category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID подкатегорий",
+                            "type": "integer",
+                            "example": "3"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Игрушки"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Массив подкатегории с товарами",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/SubCategoryResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "SubCategories"
+                ],
+                "summary": "Удаление подкатегории",
+                "operationId": "0ba613e62259fa1e395f9aa3db3307db",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID категории",
+                            "type": "integer",
+                            "example": "3"
+                        }
+                    },
+                    {
+                        "name": "sub_category",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "ID подкатегорий",
+                            "type": "integer",
+                            "example": "3"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Подкатегория удалена"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Category": {
+                "description": "Категория для продуктов",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID категории",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "Название категории",
+                        "type": "string",
+                        "example": "Футболка"
+                    }
+                },
+                "type": "object"
+            },
+            "ProductRequest": {
+                "description": "Класс продукта",
+                "required": [
+                    "name",
+                    "description",
+                    "price",
+                    "category_id",
+                    "sub_category_id"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Название продукта",
+                        "type": "string",
+                        "example": "Футболка"
+                    },
+                    "description": {
+                        "description": "Описание продукта",
+                        "type": "text",
+                        "example": "Хлопок, сертифицированный по экологическим стандартам, при его производстве не используются агрессивные химикаты. Выбирая такой товар, вы проявляете заботу о себе и о планете."
+                    },
+                    "price": {
+                        "description": "Цена продукта",
+                        "type": "integer",
+                        "example": 9990
+                    },
+                    "previousPrice": {
+                        "description": "Прежняя цена продукта",
+                        "type": "integer",
+                        "example": 10990
+                    },
+                    "sub_category_id": {
+                        "description": "ID подкатегории товара",
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "category_id": {
+                        "description": "ID категории товара",
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "genders": {
+                        "description": "Пол товара",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "gender": {
+                                    "type": "string",
+                                    "example": "Мужское"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "sizes": {
+                        "description": "Размеры товара",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "size": {
+                                    "type": "string",
+                                    "example": "XXS"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "colors": {
+                        "description": "Цвета товара",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "color": {
+                                    "type": "string",
+                                    "example": "#0297c8"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "images": {
+                        "description": "Изображения товара",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "path": {
+                                    "type": "string",
+                                    "example": "public/images/mockup.png"
+                                },
+                                "product_id": {
+                                    "type": "integer",
+                                    "example": 3
+                                },
+                                "color_id": {
+                                    "type": "integer",
+                                    "example": 3
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Product": {
+                "description": "Класс продукта",
+                "required": [
+                    "id",
+                    "name",
+                    "description",
+                    "price",
+                    "category_id",
+                    "sub_category_id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID продукта",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "Название продукта",
+                        "type": "string",
+                        "example": "Футболка"
+                    },
+                    "description": {
+                        "description": "Описание продукта",
+                        "type": "text",
+                        "example": "Хлопок, сертифицированный по экологическим стандартам, при его производстве не используются агрессивные химикаты. Выбирая такой товар, вы проявляете заботу о себе и о планете."
+                    },
+                    "price": {
+                        "description": "Цена продукта",
+                        "type": "integer",
+                        "example": "9 990"
+                    },
+                    "previousPrice": {
+                        "description": "Прежняя цена продукта",
+                        "type": "integer",
+                        "example": "10 990"
+                    },
+                    "sub_category_id": {
+                        "description": "ID подктаегории товара",
+                        "type": "integer",
+                        "example": "3"
+                    }
+                },
+                "type": "object"
+            },
+            "SubCategory": {
+                "description": "Подкатегория для продуктов",
+                "required": [
+                    "id",
+                    "name",
+                    "category_id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID подкатегории",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "Название подкатегории",
+                        "type": "string",
+                        "example": "Футболка"
+                    },
+                    "category_id": {
+                        "description": "Основная категория для подкатегории",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "products": {
+                        "description": "ID подкатегории товара",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Product"
+                        },
+                        "example": [
+                            {
+                                "id": 1,
+                                "name": "Худи",
+                                "description": "Ea ut consequatur natus sed occaecati hic. Adipisci repellendus id cum itaque quis aliquid. Aut sunt suscipit in sequi tenetur. Sit illo quo velit quia quia possimus.",
+                                "price": "KZT 34,227.00",
+                                "previousPrice": "KZT 92,848.00",
+                                "sub_category": "Верхняя одежда",
+                                "category_id": "Одежда"
+                            },
+                            {
+                                "id": 2,
+                                "name": "Худи",
+                                "description": "Suscipit et modi magnam in dolorum. Sit deserunt sunt aut non. Nulla nihil veritatis aut fuga consectetur quidem quae. Numquam earum excepturi sapiente et illo nisi sint.",
+                                "price": "KZT 64,807.00",
+                                "previousPrice": "KZT 42,079.00",
+                                "sub_category": "Верхняя одежда",
+                                "category_id": "Одежда"
+                            }
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "CategoryResource": {
+                "description": "Категория для продуктов",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID категории",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "Название категории",
+                        "type": "string",
+                        "example": "Одежда"
+                    },
+                    "sub_categories": {
+                        "description": "Подкатегорий основной категории",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SubCategory"
+                        },
+                        "example": [
+                            {
+                                "id": "1",
+                                "name": "Верхняя одежда"
+                            },
+                            {
+                                "id": "2",
+                                "name": "Штаны"
+                            }
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "ProductResource": {
+                "description": "Класс продукта",
+                "required": [
+                    "id",
+                    "name",
+                    "description",
+                    "price",
+                    "category_id",
+                    "sub_category_id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID продукта",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "Название продукта",
+                        "type": "string",
+                        "example": "Футболка"
+                    },
+                    "description": {
+                        "description": "Описание продукта",
+                        "type": "text",
+                        "example": "Хлопок, сертифицированный по экологическим стандартам, при его производстве не используются агрессивные химикаты. Выбирая такой товар, вы проявляете заботу о себе и о планете."
+                    },
+                    "price": {
+                        "description": "Цена продукта",
+                        "type": "integer",
+                        "example": 9990
+                    },
+                    "previousPrice": {
+                        "description": "Прежняя цена продукта",
+                        "type": "integer",
+                        "example": 10990
+                    },
+                    "sub_category_id": {
+                        "description": "ID подкатегории товара",
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "category_id": {
+                        "description": "ID категории товара",
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "genders": {
+                        "description": "Пол товара",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "gender": {
+                                    "type": "string",
+                                    "example": "Мужское"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "sizes": {
+                        "description": "Размеры товара",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "size": {
+                                    "type": "string",
+                                    "example": "XXS"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "colors": {
+                        "description": "Цвета товара",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "color": {
+                                    "type": "string",
+                                    "example": "#0297c8"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "images": {
+                        "description": "Изображения товара",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "path": {
+                                    "type": "string",
+                                    "example": "public/images/mockup.png"
+                                },
+                                "product_id": {
+                                    "type": "integer",
+                                    "example": 3
+                                },
+                                "color_id": {
+                                    "type": "integer",
+                                    "example": 3
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "SubCategoryResource": {
+                "description": "Подкатегория для продуктов",
+                "required": [
+                    "id",
+                    "name",
+                    "category_id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID подкатегории",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "Название подкатегории",
+                        "type": "string",
+                        "example": "Футболка"
+                    },
+                    "category_id": {
+                        "description": "Основная категория для подкатегории",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "products": {
+                        "description": "Товары подктаегории",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Category"
+                        },
+                        "example": [
+                            {
+                                "id": 1,
+                                "name": "Худи",
+                                "description": "Ea ut consequatur natus sed occaecati hic. Adipisci repellendus id cum itaque quis aliquid. Aut sunt suscipit in sequi tenetur. Sit illo quo velit quia quia possimus.",
+                                "price": "KZT 34,227.00",
+                                "previousPrice": "KZT 92,848.00",
+                                "sub_category": "Верхняя одежда",
+                                "category_id": "Одежда"
+                            },
+                            {
+                                "id": 2,
+                                "name": "Худи",
+                                "description": "Suscipit et modi magnam in dolorum. Sit deserunt sunt aut non. Nulla nihil veritatis aut fuga consectetur quidem quae. Numquam earum excepturi sapiente et illo nisi sint.",
+                                "price": "KZT 64,807.00",
+                                "previousPrice": "KZT 42,079.00",
+                                "sub_category": "Верхняя одежда",
+                                "category_id": "Одежда"
+                            }
+                        ]
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Categories",
+            "description": "Categories"
+        },
+        {
+            "name": "Products",
+            "description": "Products"
+        },
+        {
+            "name": "SubCategories",
+            "description": "SubCategories"
+        }
+    ]
+}

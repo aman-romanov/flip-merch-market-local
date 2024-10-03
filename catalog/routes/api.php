@@ -21,13 +21,15 @@ Route::get('/', function(){return redirect()->route('products.index');}
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
+Route::post('/products/find', [ProductController::class, 'findProductsByID'])->name('products.find');
+
 Route::get('/products/{product}', [ProductController::class, 'product'])->name('products.product');
 
-Route::get('/categories', [CategoryController::class, 'categories'])->name('categories.index');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
-Route::get('/{category}', [SubCategoryController::class, 'sub_categories'])->name('sub_categories.index');
+Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
-Route::get('/{category}/{sub_category}', [ProductController::class, 'products'])->name('sub_categories.products');
+Route::get('/{category}/{sub_category}', [SubCategoryController::class, 'show'])->name('sub_categories.show');
 
 Route::get('/{category}/{sub_category}/{product}', [ProductController::class, 'show'])->name('products.show');
 

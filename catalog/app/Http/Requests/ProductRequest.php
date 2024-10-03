@@ -11,6 +11,7 @@
                 'name' => 'required | string | max:50',
                 'description' => 'required',
                 'price' => 'required | integer',
+                'previousPrice' => 'integer',
                 'sub_category_id' => 'required| integer'
             ];
         }

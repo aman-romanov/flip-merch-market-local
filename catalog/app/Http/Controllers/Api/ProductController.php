@@ -11,47 +11,142 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 
+
 class ProductController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/products",
+     *     summary="Вывод всех товаров",
+     *     tags={"Products"},
+     *     @OA\Response(response="200", description="Массив со свойствами товара", 
+     *         @OA\JsonContent(
+     *             @OA\Property(property="data", type="array",
+     *                 @OA\Items(ref="#/components/schemas/ProductResource")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="500", description="Server error")
+     * )
+     */
+
     public function index(){
         $products = Product::all();
 
         return ProductResource::collection($products->load('colors', 'sizes', 'images', 'genders'));
     }
 
-    public function products(Category $category, SubCategory $sub_category){
-        $current_sub_category = SubCategory::where([
-            'category_id' => $category->id,
-            'name' => $sub_category->name
-        ])->first();
-
-        $products = Product::where('sub_category_id', $current_sub_category->id)->get();
-
-        $products->load('colors', 'sizes', 'images', 'genders');
-
-        return ProductResource::collection($products);
-    }
+    /**
+     * @OA\Get(
+     *     path="/api/{category}/{sub_category}/{product}",
+     *     summary="Карточка товара определенной подкатегории",
+     *     tags={"Products"},
+     *     @OA\Parameter(
+     *         name="category",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer", description="ID категории", example="1")
+     *     ),
+     *     @OA\Parameter(
+     *         name="sub_category",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer", description="ID подкатегории", example="3")
+     *     ),
+     *     @OA\Parameter(
+     *         name="product",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer", description="ID товара", example="3")
+     *     ),
+     *     @OA\Response(response="200", description="Карточка товара", 
+     *         @OA\JsonContent(
+     *             @OA\Property(property="data", type="array",
+     *                 @OA\Items(ref="#/components/schemas/ProductResource")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="500", description="Server error")
+     * )
+     */
 
     public function show(Category $category, SubCategory $sub_category, Product $product){
-        $product->load('colors', 'sizes', 'images', 'genders');
+        $product = $product->load('colors', 'sizes', 'images', 'genders');
 
         return new ProductResource($product);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/api/products/{product}",
+     *     summary="Карточка любого товара",
+     *     tags={"Products"},
+     *     @OA\Parameter(
+     *         name="product",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer", description="ID товара", example="3")
+     *     ),
+     *     @OA\Response(response="200", description="Карточка товара", 
+     *         @OA\JsonContent(
+     *             @OA\Property(property="data", type="array",
+     *                 @OA\Items(ref="#/components/schemas/ProductResource")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="500", description="Server error")
+     * )
+     */
 
     public function product(Product $product){
 
-        $product ->load('colors', 'sizes', 'images', 'genders');
+        $product = $product->load('colors', 'sizes', 'images', 'genders');
 
         return new ProductResource($product);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/admin/{category}/{sub_category}/product/create",
+     *     summary="Создание товара в разделе подкатегории",
+     *     tags={"Products"},
+     *     @OA\Parameter(
+     *         name="category",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer", description="ID категории", example="1")
+     *     ),
+     *     @OA\Parameter(
+     *         name="sub_category",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer", description="ID подкатегории", example="3")
+     *     ),
+     * 
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/ProductRequest")
+     *     ),
+     * 
+     *     @OA\Response(response="201", description="Карточка товара", 
+     *         @OA\JsonContent(
+     *            @OA\Property(property="data", type="array",
+     *                @OA\Items(ref="#/components/schemas/ProductResource")
+     *            )
+     *         )
+     *     ),
+     * 
+     *     @OA\Response(response="500", description="Server error")
+     * )
+     */
+
 
     public function storeWithCategory(Category $category, SubCategory $sub_category, Request $request){
-        
         $validated = $request->validate([
             'name' => 'required | string | max:50',
             'description' => 'required',
             'price' => 'required | integer',
+            'previousPrice' => 'integer'
         ]);
 
         // return $validated['price'];
@@ -60,6 +155,7 @@ class ProductController extends Controller
             'name' => $validated['name'],
             'description' => $validated['description'],
             'price' => $validated['price'],
+            'previousPrice' => $validated['previousPrice'],
             'sub_category_id' => $sub_category->id
         ]);
 
@@ -89,6 +185,29 @@ class ProductController extends Controller
         
         return new ProductResource($product);
     }
+
+    /**
+     * @OA\Post(
+     *     path="/api/admin/products/create",
+     *     summary="Создание нового товара",
+     *     tags={"Products"},
+     * 
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/ProductResource")
+     *     ),
+     * 
+     *     @OA\Response(response="201", description="Карточка товара", 
+     *         @OA\JsonContent(
+     *             @OA\Property(property="data", type="array",
+     *                 @OA\Items(ref="#/components/schemas/ProductRequest")
+     *             )
+     *         )
+     *     ),
+     * 
+     *     @OA\Response(response="500", description="Server error")
+     * )
+     */
 
     public function store (ProductRequest $request){
         $validated = $request->validated();
@@ -124,6 +243,35 @@ class ProductController extends Controller
         return new ProductResource($product);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/admin/products/{product}",
+     *     summary="Обновление товара",
+     *     tags={"Products"},
+     *     @OA\Parameter(
+     *         name="product",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer", description="ID товара", example="3")
+     *     ),
+     * 
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/ProductRequest")
+     *     ),
+     * 
+     *     @OA\Response(response="200", description="Карточка товара", 
+     *         @OA\JsonContent(
+     *             @OA\Property(property="data", type="array",
+     *                 @OA\Items(ref="#/components/schemas/ProductResource")
+     *             )
+     *         )
+     *     ),
+     * 
+     *     @OA\Response(response="500", description="Server error")
+     * )
+     */
+
     public function update (Product $product, ProductRequest $request){
         $validated = $request->validated();
 
@@ -158,9 +306,64 @@ class ProductController extends Controller
         return new ProductResource($product);
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/admin/products/{product}",
+     *     summary="Удаление товара",
+     *     tags={"Products"},
+     *     @OA\Parameter(
+     *         name="product",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer", description="ID товара", example="3")
+     *     ),
+     *     @OA\Response(response="200", description="Товар удален"),
+     * 
+     *     @OA\Response(response="500", description="Server error")
+     * )
+     */
+
     public function delete(Product $product){
         $product->delete();
 
         return response()->json('Продукт удален успешно!');
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/products/find",
+     *     summary="Поиск товаров по массиву ID",
+     *     tags={"Products"},
+     * 
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="id", type="array",
+     *                @OA\Items(type="integer", example="3")
+     *            )
+     *         )
+     *     ),
+     * 
+     *     @OA\Response(response="200", description="Массив товаров", 
+     *         @OA\JsonContent(
+     *            @OA\Property(property="data", type="array",
+     *                @OA\Items(ref="#/components/schemas/ProductResource")
+     *            )
+     *         )
+     *     ),
+     * 
+     *     @OA\Response(response="500", description="Server error")
+     * )
+     */
+
+    public function findProductsByID(Request $request){
+        $request->validate([
+            "id" => "required|array",
+            "id.*" => "integer"
+        ]);
+
+        $products = Product::whereIn('id', $request->input('id'))->with('sizes', 'genders', 'colors', 'images')->get();
+
+        return ProductResource::collection($products);
     }
 }

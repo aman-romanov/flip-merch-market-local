@@ -24,7 +24,7 @@ class ProductResource extends JsonResource
             'price' => $this->price,
             'previousPrice' => $this->previousPrice,
             'sub_category' => SubCategory::findOrFail($this->sub_category->id)->first()->name,
-            'category_id' => Category::findOrFail(SubCategory::findOrFail($this->sub_category->id)->first()->id)->first()->name,
+            'category' => Category::findOrFail(SubCategory::findOrFail($this->sub_category->id)->first()->id)->first()->name,
             'colors' => ColorResource::collection($this->whenLoaded('colors')),
             'sizes' => SizeResource::collection($this->whenLoaded('sizes')),
             'gender' => GenderResource::collection($this->whenLoaded('genders')),

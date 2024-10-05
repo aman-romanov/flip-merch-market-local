@@ -41,8 +41,8 @@ class SubCategoryController extends Controller
      */
 
     public function show(Category $category, SubCategory $sub_category){
-        $sub_category = $sub_category::with(['products'])->latest()->get();
-        return SubCategoryResource::collection( $sub_category);
+        $sub_category = $sub_category->load('products');
+        return new SubCategoryResource($sub_category);
     }
 
     /**
@@ -60,8 +60,7 @@ class SubCategoryController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="name", type="string", example="Игрушки"),
-     *             @OA\Property(property="category_id", type="integer", example="1")
+     *             @OA\Property(property="name", type="string", example="Игрушки")
      *         )
      *     ),
      * 
@@ -109,8 +108,7 @@ class SubCategoryController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="name", type="string", example="Игрушки"),
-     *             @OA\Property(property="category_id", type="integer", example="1")
+     *             @OA\Property(property="name", type="string", example="Игрушки")
      *         )
      *     ),
      * 
@@ -128,12 +126,11 @@ class SubCategoryController extends Controller
     public function update(Category $category, SubCategory $sub_category, Request $request){
         $validated = $request->validate([
             'name' =>'required | string | max:50',
-            'category_id' => 'required | integer'
         ]);
 
         $sub_category->update([
             'name' => $validated['name'],
-            'category_id' => $validated['category_id']
+            'category_id' => $category->id
         ]);
 
         return new SubCategoryResource($sub_category);

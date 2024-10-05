@@ -6,7 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Admin\\Services\\ProductService' => $baseDir . '/app/Admin/Services/ProductService.php',
     'App\\Http\\Controllers\\Api\\CategoryController' => $baseDir . '/app/Http/Controllers/Api/CategoryController.php',
     'App\\Http\\Controllers\\Api\\ProductController' => $baseDir . '/app/Http/Controllers/Api/ProductController.php',
     'App\\Http\\Controllers\\Api\\SubCategoryController' => $baseDir . '/app/Http/Controllers/Api/SubCategoryController.php',
@@ -32,6 +31,13 @@ return array(
     'App\\Models\\SubCategory' => $baseDir . '/app/Models/SubCategory.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
+    'App\\Swagger\\Classes\\Schemas\\CategorySchema' => $baseDir . '/app/Swagger/Classes/Schemas/CategorySchema.php',
+    'App\\Swagger\\Classes\\Schemas\\ProductRequestSchema' => $baseDir . '/app/Swagger/Classes/Schemas/ProductRequestSchema.php',
+    'App\\Swagger\\Classes\\Schemas\\ProductSchema' => $baseDir . '/app/Swagger/Classes/Schemas/ProductSchema.php',
+    'App\\Swagger\\Classes\\Schemas\\SubCategorySchema' => $baseDir . '/app/Swagger/Classes/Schemas/SubCategorySchema.php',
+    'App\\Swagger\\Resources\\Schemas\\CategoryResourceSchema' => $baseDir . '/app/Swagger/Resources/Schemas/CategoryResourceSchema.php',
+    'App\\Swagger\\Resources\\Schemas\\ProductResourceSchema' => $baseDir . '/app/Swagger/Resources/Schemas/ProductResourceSchema.php',
+    'App\\Swagger\\Resources\\Schemas\\SubCategoryResourceSchema' => $baseDir . '/app/Swagger/Resources/Schemas/SubCategoryResourceSchema.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Brick\\Math\\BigDecimal' => $vendorDir . '/brick/math/src/BigDecimal.php',
     'Brick\\Math\\BigInteger' => $vendorDir . '/brick/math/src/BigInteger.php',

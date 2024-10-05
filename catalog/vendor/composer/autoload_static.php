@@ -537,7 +537,6 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
     );
 
     public static $classMap = array (
-        'App\\Admin\\Services\\ProductService' => __DIR__ . '/../..' . '/app/Admin/Services/ProductService.php',
         'App\\Http\\Controllers\\Api\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/CategoryController.php',
         'App\\Http\\Controllers\\Api\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/ProductController.php',
         'App\\Http\\Controllers\\Api\\SubCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/SubCategoryController.php',
@@ -563,6 +562,13 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'App\\Models\\SubCategory' => __DIR__ . '/../..' . '/app/Models/SubCategory.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
+        'App\\Swagger\\Classes\\Schemas\\CategorySchema' => __DIR__ . '/../..' . '/app/Swagger/Classes/Schemas/CategorySchema.php',
+        'App\\Swagger\\Classes\\Schemas\\ProductRequestSchema' => __DIR__ . '/../..' . '/app/Swagger/Classes/Schemas/ProductRequestSchema.php',
+        'App\\Swagger\\Classes\\Schemas\\ProductSchema' => __DIR__ . '/../..' . '/app/Swagger/Classes/Schemas/ProductSchema.php',
+        'App\\Swagger\\Classes\\Schemas\\SubCategorySchema' => __DIR__ . '/../..' . '/app/Swagger/Classes/Schemas/SubCategorySchema.php',
+        'App\\Swagger\\Resources\\Schemas\\CategoryResourceSchema' => __DIR__ . '/../..' . '/app/Swagger/Resources/Schemas/CategoryResourceSchema.php',
+        'App\\Swagger\\Resources\\Schemas\\ProductResourceSchema' => __DIR__ . '/../..' . '/app/Swagger/Resources/Schemas/ProductResourceSchema.php',
+        'App\\Swagger\\Resources\\Schemas\\SubCategoryResourceSchema' => __DIR__ . '/../..' . '/app/Swagger/Resources/Schemas/SubCategoryResourceSchema.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',

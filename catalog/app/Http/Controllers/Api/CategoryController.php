@@ -61,8 +61,8 @@ class CategoryController extends Controller
      */
 
     public function show(Category $category){
-        $category = $category::with(['sub_categories'])->latest()->get();
-        return CategoryResource::collection($category);
+        $category ->load('sub_categories')->get();
+        return new CategoryResource($category);
     }
 
     /**

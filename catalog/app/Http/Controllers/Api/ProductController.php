@@ -180,10 +180,8 @@ class ProductController extends Controller
         }
 
         $product->categories()->attach($category->id);
-
-        $product->load('colors', 'sizes', 'images', 'genders');
         
-        return new ProductResource($product);
+        return new ProductResource($product->load('colors', 'sizes', 'images', 'genders'));
     }
 
     /**
@@ -273,33 +271,42 @@ class ProductController extends Controller
      */
 
     public function update (Product $product, ProductRequest $request){
+
         $validated = $request->validated();
 
         // return response()->json($validated['sub_category_id']);
 
         $product->update($validated);
-
-        foreach($request->colors as $color){
-            $product->colors()->sync($color['id']);
+        if($request->colors){
+            foreach($request->colors as $color){
+                $product->colors()->sync($color['id']);
+            }
+        }
+        if($request->images){
+            foreach($request->images as $image){
+                Image::create([
+                    'product_id' => $product->id,
+                    'color_id' => $image['color_id'],
+                    'path'=> $image['path']
+                ]);
+            }
         }
 
-        foreach($request->images as $image){
-            Image::create([
-                'product_id' => $product->id,
-                'color_id' => $image['color_id'],
-                'path'=> $image['path']
-            ]);
-        } 
-
-        foreach($request->sizes as $size){
-            $product->sizes()->sync($size['id']);
+        if($request->sizes){
+            foreach($request->sizes as $size){
+                $product->sizes()->sync($size['id']);
+            }
+        }
+        
+        if($request->genders){
+            foreach($request->genders as $gender){
+                $product->genders()->attach($gender['id']);
+            }
         }
 
-        foreach($request->genders as $gender){
-            $product->genders()->attach($gender['id']);
+        if($request->category_id){
+            $product->categories()->sync($request->category_id);
         }
-
-        $product->categories()->sync($request->category_id);
 
         $product->load('colors', 'sizes', 'images', 'genders');
 

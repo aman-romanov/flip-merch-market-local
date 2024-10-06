@@ -8,11 +8,11 @@
         public function rules(): array
         {
             return [
-                'name' => 'required | string | max:50',
-                'description' => 'required',
-                'price' => 'required | integer',
+                'name' => 'sometimes | string | max:50',
+                'description' => 'sometimes',
+                'price' => 'sometimes | integer',
                 'previousPrice' => 'integer',
-                'sub_category_id' => 'required| integer'
+                'sub_category_id' => 'sometimes | integer'
             ];
         }
     }

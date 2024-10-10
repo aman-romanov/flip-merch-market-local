@@ -35,9 +35,9 @@ services:
     command: ["sh", "-c", "wait-for-mysql.sh mysql && php artisan migrate && apache2-foreground"]
 
 
-  searchservice:
+  search:
     build:
-      context: ./searchservice
+      context: ./search
       dockerfile: Dockerfile
     ports:
       - "8083:80"

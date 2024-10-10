@@ -12,7 +12,8 @@
                 'description' => 'sometimes',
                 'price' => 'sometimes | integer',
                 'previousPrice' => 'integer',
-                'sub_category_id' => 'sometimes | integer'
+                'sub_category_id' => 'sometimes | integer',
+                'category_id' => 'sometimes | integer'
             ];
         }
     }

@@ -682,10 +682,6 @@
                                     "name": {
                                         "type": "string",
                                         "example": "Игрушки"
-                                    },
-                                    "category_id": {
-                                        "type": "integer",
-                                        "example": "1"
                                     }
                                 },
                                 "type": "object"

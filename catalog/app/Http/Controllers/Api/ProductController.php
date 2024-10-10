@@ -159,24 +159,32 @@ class ProductController extends Controller
             'sub_category_id' => $sub_category->id
         ]);
 
-        foreach($request->colors as $color){
-            $product->colors()->attach($color['id']);
+        if($request->colors){
+            foreach($request->colors as $color){
+                $product->colors()->attach($color['id']);
+            }
         }
 
-        foreach($request->images as $image){
-            Image::create([
-                'product_id' => $product->id,
-                'color_id' => $image['color_id'],
-                'path'=> $image['path']
-            ]);
-        } 
-
-        foreach($request->sizes as $size){
-            $product->sizes()->attach($size['id']);
+        if($request->images){
+            foreach($request->images as $image){
+                Image::create([
+                    'product_id' => $product->id,
+                    'color_id' => $image['color_id'],
+                    'path'=> $image['path']
+                ]);
+            } 
         }
 
-        foreach($request->genders as $gender){
-            $product->genders()->attach($gender['id']);
+        if($request->sizes){
+            foreach($request->sizes as $size){
+                $product->sizes()->attach($size['id']);
+            }
+        }
+
+        if($request->images){
+            foreach($request->genders as $gender){
+                $product->genders()->attach($gender['id']);
+            }
         }
 
         $product->categories()->attach($category->id);
@@ -213,25 +221,31 @@ class ProductController extends Controller
         // return response()->json($validated['sub_category_id']);
 
         $product = Product::create($validated);
-
-        foreach($request->colors as $color){
-            $product->colors()->attach($color['id']);
+        
+        if($request->colors){
+            foreach($request->colors as $color){
+                $product->colors()->attach($color['id']);
+            }
         }
 
-        foreach($request->images as $image){
-            Image::create([
-                'product_id' => $product->id,
-                'color_id' => $image['color_id'],
-                'path'=> $image['path']
-            ]);
-        } 
-
-        foreach($request->sizes as $size){
-            $product->sizes()->attach($size['id']);
+        if($request->images){
+            foreach($request->images as $image){
+                Image::create([
+                    'product_id' => $product->id,
+                    'color_id' => $image['color_id'],
+                    'path'=> $image['path']
+                ]);
+            }
         }
-
-        foreach($request->genders as $gender){
-            $product->genders()->attach($gender['id']);
+        if($request->sizes){
+            foreach($request->sizes as $size){
+                $product->sizes()->attach($size['id']);
+            }
+        }
+        if($request->genders){
+            foreach($request->genders as $gender){
+                $product->genders()->attach($gender['id']);
+            }
         }
 
         $product->categories()->attach($request->category_id);
@@ -369,7 +383,7 @@ class ProductController extends Controller
             "id.*" => "integer"
         ]);
 
-        $products = Product::whereIn('id', $request->input('id'))->with('sizes', 'genders', 'colors', 'images')->get();
+        $products = Product::whereIn('id', $request->input('id'))->orderByRaw('FIELD(id, ' . implode(',', $request->input('id')) . ')')->with('sizes', 'genders', 'colors', 'images')->get();
 
         return ProductResource::collection($products);
     }

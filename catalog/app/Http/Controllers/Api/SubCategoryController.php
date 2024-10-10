@@ -60,8 +60,7 @@ class SubCategoryController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="name", type="string", example="Игрушки"),
-     *             @OA\Property(property="category_id", type="integer", example="1")
+     *             @OA\Property(property="name", type="string", example="Игрушки")
      *         )
      *     ),
      * 

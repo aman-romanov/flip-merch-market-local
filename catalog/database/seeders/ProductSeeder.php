@@ -52,5 +52,11 @@ class ProductSeeder extends Seeder
                     
             }
         }
+
+        $products = Product::all();
+        foreach($products as $product){
+            $product->categories()->attach(1);
+        }
+    
     }
 }

@@ -8,12 +8,12 @@
         public function rules(): array
         {
             return [
-                'name' => 'sometimes | string | max:50',
-                'description' => 'sometimes',
-                'price' => 'sometimes | integer',
+                'name' => 'required | string | max:50',
+                'description' => 'required',
+                'price' => 'required | integer',
                 'previousPrice' => 'integer',
-                'sub_category_id' => 'sometimes | integer',
-                'category_id' => 'sometimes | integer'
+                'sub_category_id' => 'required | integer',
+                'category_id' => 'required | integer'
             ];
         }
     }

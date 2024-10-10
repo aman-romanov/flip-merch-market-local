@@ -128,6 +128,9 @@
                     },
                     "500": {
                         "description": "Server error"
+                    },
+                    "422": {
+                        "description": "Field is required"
                     }
                 }
             }
@@ -422,6 +425,9 @@
                     },
                     "500": {
                         "description": "Server error"
+                    },
+                    "422": {
+                        "description": "Field is required"
                     }
                 }
             }
@@ -464,6 +470,9 @@
                     },
                     "500": {
                         "description": "Server error"
+                    },
+                    "422": {
+                        "description": "Field is required"
                     }
                 }
             }
@@ -518,6 +527,9 @@
                     },
                     "500": {
                         "description": "Server error"
+                    },
+                    "422": {
+                        "description": "Field is required"
                     }
                 }
             },
@@ -596,6 +608,9 @@
                     },
                     "500": {
                         "description": "Server error"
+                    },
+                    "422": {
+                        "description": "ID is required and must be array"
                     }
                 }
             }
@@ -710,6 +725,9 @@
                     },
                     "500": {
                         "description": "Server error"
+                    },
+                    "422": {
+                        "description": "Field is required"
                     }
                 }
             }
@@ -780,6 +798,9 @@
                     },
                     "500": {
                         "description": "Server error"
+                    },
+                    "422": {
+                        "description": "Field is required"
                     }
                 }
             },
@@ -1108,11 +1129,6 @@
                     "sub_category_id"
                 ],
                 "properties": {
-                    "id": {
-                        "description": "ID продукта",
-                        "type": "integer",
-                        "example": 1
-                    },
                     "name": {
                         "description": "Название продукта",
                         "type": "string",

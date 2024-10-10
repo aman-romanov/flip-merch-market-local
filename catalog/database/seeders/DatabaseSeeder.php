@@ -51,11 +51,6 @@ class DatabaseSeeder extends Seeder
             
         }
 
-        $random_products = Product::inRandomOrder()->take(15)->get();
-        foreach($random_products as $product){
-            $product->categories()->syncWithoutDetaching(Category::findOrFail(3)->id);
-        }
-
         $random_products = Product::inRandomOrder()->take(5)->get();
         foreach($random_products as $product){
             $product->genders()->syncWithoutDetaching(Gender::findOrFail(1)->id);

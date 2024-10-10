@@ -136,17 +136,19 @@ class ProductController extends Controller
      *         )
      *     ),
      * 
-     *     @OA\Response(response="500", description="Server error")
+     *     @OA\Response(response="500", description="Server error"),
+     * 
+     *     @OA\Response(response="422", description="Field is required")
      * )
      */
 
 
     public function storeWithCategory(Category $category, SubCategory $sub_category, Request $request){
         $validated = $request->validate([
-            'name' => 'required | string | max:50',
-            'description' => 'required',
-            'price' => 'required | integer',
-            'previousPrice' => 'integer'
+            "name" => "required | string | max:50",
+            "description" => "required",
+            "price" => "required | integer",
+            "previousPrice" => "integer"
         ]);
 
         // return $validated['price'];
@@ -181,7 +183,7 @@ class ProductController extends Controller
             }
         }
 
-        if($request->images){
+        if($request->genders){
             foreach($request->genders as $gender){
                 $product->genders()->attach($gender['id']);
             }
@@ -211,12 +213,21 @@ class ProductController extends Controller
      *         )
      *     ),
      * 
-     *     @OA\Response(response="500", description="Server error")
+     *     @OA\Response(response="500", description="Server error"),
+     * 
+     *     @OA\Response(response="422", description="Field is required")
      * )
      */
 
-    public function store (ProductRequest $request){
-        $validated = $request->validated();
+    public function store (Request $request){
+        $validated = $request->validate([
+            "name" => "required | string | max:50",
+            "description" => "required",
+            "price" => "required | integer",
+            "previousPrice" => "integer",
+            "sub_category_id" => "required | integer",
+            "category_id" => "required | integer"
+        ]);
 
         // return response()->json($validated['sub_category_id']);
 
@@ -280,13 +291,22 @@ class ProductController extends Controller
      *         )
      *     ),
      * 
-     *     @OA\Response(response="500", description="Server error")
+     *     @OA\Response(response="500", description="Server error"),
+     * 
+     *     @OA\Response(response="422", description="Field is required")
      * )
      */
 
-    public function update (Product $product, ProductRequest $request){
+    public function update (Product $product, Request $request){
 
-        $validated = $request->validated();
+        $validated = $request->validate([
+            "name" => "sometimes | string | max:50",
+            "description" => "sometimes",
+            "price" => "sometimes | integer",
+            "previousPrice" => "integer",
+            "sub_category_id" => "sometimes | integer",
+            "category_id" => "sometimes | integer"
+        ]);
 
         // return response()->json($validated['sub_category_id']);
 
@@ -318,9 +338,7 @@ class ProductController extends Controller
             }
         }
 
-        if($request->category_id){
-            $product->categories()->sync($request->category_id);
-        }
+        $product->categories()->sync($request->category_id);
 
         $product->load('colors', 'sizes', 'images', 'genders');
 
@@ -373,7 +391,9 @@ class ProductController extends Controller
      *         )
      *     ),
      * 
-     *     @OA\Response(response="500", description="Server error")
+     *     @OA\Response(response="500", description="Server error"),
+     * 
+     *     @OA\Response(response="422", description="ID is required and must be array")
      * )
      */
 

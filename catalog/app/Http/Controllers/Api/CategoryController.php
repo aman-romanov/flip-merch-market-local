@@ -87,7 +87,9 @@ class CategoryController extends Controller
      *         )
      *     ),
      * 
-     *     @OA\Response(response="500", description="Server error")
+     *     @OA\Response(response="500", description="Server error"),
+     * 
+     *     @OA\Response(response="422", description="Field is required")
      * )
      */
 

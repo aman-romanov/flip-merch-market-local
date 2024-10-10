@@ -12,11 +12,6 @@
      *     description="Класс продукта",
      *     required={"id", "name", "description", "price", "category_id", "sub_category_id"},
      *     @OA\Property(
-     *         property="id", 
-     *         type="integer",
-     *         example=1,
-     *         description="ID продукта"),
-     *     @OA\Property(
      *         property="name", 
      *         type="string",
      *         example="Футболка",

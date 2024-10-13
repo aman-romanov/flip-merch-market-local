@@ -16,43 +16,46 @@ use App\Http\Controllers\Api\SubCategoryController;
    
 // Маршруты для пользователей
 
-Route::get('/', function(){return redirect()->route('products.index');}
-);
+Route::middleware(['logApiRequests'])->group(function () {
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/', function(){return redirect()->route('products.index');}
+    );
 
-Route::post('/products/find', [ProductController::class, 'findProductsByID'])->name('products.find');
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
-Route::get('/products/{product}', [ProductController::class, 'product'])->name('products.product');
+    Route::post('/products/find', [ProductController::class, 'findProductsByID'])->name('products.find');
 
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/products/{product}', [ProductController::class, 'product'])->name('products.product');
 
-Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
-Route::get('/{category}/{sub_category}', [SubCategoryController::class, 'show'])->name('sub_categories.show');
+    Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
-Route::get('/{category}/{sub_category}/{product}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/{category}/{sub_category}', [SubCategoryController::class, 'show'])->name('sub_categories.show');
 
-// Маршруты для администратора
+    Route::get('/{category}/{sub_category}/{product}', [ProductController::class, 'show'])->name('products.show');
 
-Route::prefix('admin')->group(function(){
-    Route::post('/categories/create', [CategoryController::class, 'store'])->name('categories.store'); // Создать новую категорию
+    // Маршруты для администратора
 
-    Route::post('/{category}/sub_category/create', [SubCategoryController::class, 'store'])->name('sub_categories.store'); // Создать новую подкатегорию
+    Route::prefix('admin')->group(function(){
+        Route::post('/categories/create', [CategoryController::class, 'store'])->name('categories.store'); // Создать новую категорию
 
-    Route::post('/{category}/{sub_category}/product/create', [ProductController::class, 'storeWithCategory'])->name('sub_categories.product.store'); // Создать товар через раздел категорий
+        Route::post('/{category}/sub_category/create', [SubCategoryController::class, 'store'])->name('sub_categories.store'); // Создать новую подкатегорию
 
-    Route::post('/products/create', [ProductController::class, 'store'])->name('products.store'); // Создать товар
+        Route::post('/{category}/{sub_category}/product/create', [ProductController::class, 'storeWithCategory'])->name('sub_categories.product.store'); // Создать товар через раздел категорий
 
-    Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update'); // Обновление данных товара по ID
+        Route::post('/products/create', [ProductController::class, 'store'])->name('products.store'); // Создать товар
 
-    Route::delete('/products/{product}', [ProductController::class, 'delete'])->name('products.delete'); // Удаление товара
+        Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update'); // Обновление данных товара по ID
 
-    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update'); // Обновить категорию
+        Route::delete('/products/{product}', [ProductController::class, 'delete'])->name('products.delete'); // Удаление товара
 
-    Route::delete('/categories/{category}', [CategoryController::class, 'delete'])->name('categories.delete'); // Удалить категорию
+        Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update'); // Обновить категорию
 
-    Route::put('/{category}/{sub_category}', [SubCategoryController::class, 'update'])->name('sub_categories.update'); // Обновить подкатегорию
+        Route::delete('/categories/{category}', [CategoryController::class, 'delete'])->name('categories.delete'); // Удалить категорию
 
-    Route::delete('/{category}/{sub_category}', [SubCategoryController::class, 'delete'])->name('sub_categories.delete'); // Удалить подкатегорию
+        Route::put('/{category}/{sub_category}', [SubCategoryController::class, 'update'])->name('sub_categories.update'); // Обновить подкатегорию
+
+        Route::delete('/{category}/{sub_category}', [SubCategoryController::class, 'delete'])->name('sub_categories.delete'); // Удалить подкатегорию
+    });
 });

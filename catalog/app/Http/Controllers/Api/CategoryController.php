@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use App\Http\Middleware\LogApiRequests;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryResource;
 
